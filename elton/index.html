@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Responsiva para Mobile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+        }
+        .container {
+            padding: 15px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            padding: 15px;
+        }
+        @media (min-width: 600px) {
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Minha Página Mobile</h1>
+</header>
+
+<div class="container">
+    <div class="card">
+        <h2>Título 1</h2>
+        <p>Conteúdo responsivo para dispositivos móveis.</p>
+    </div>
+    <div class="card">
+        <h2>Título 2</h2>
+        <p>Mais conteúdo otimizado para mobile.</p>
+    </div>
+</div>
+
+</body>
+</html>
