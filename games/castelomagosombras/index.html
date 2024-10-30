@@ -164,6 +164,8 @@
     function irParaCenario(cenarioIndex) {
         const cenario = cenarios[cenarioIndex];
         
+        if (cenarioIndex == 1) document.getElementById('musicaFundo').play();
+        
         document.getElementById('cenarioImagem').src = cenario.imagem;
         document.getElementById('cenarioTexto').textContent = cenario.texto;
 
