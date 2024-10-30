@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArenaCon Games LE</title>
+    <title>Castelo do Mago da Sombra</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,6 +14,8 @@
 
         img {
             width: 100%;
+            max-height: 400px;
+            object-fit: cover;
         }
 
         header {
@@ -35,8 +37,15 @@
             padding: 15px;
         }
 
-        .linkdojogo {
+        .buttons {
             text-align: center;
+            margin-top: 10px;
+        }
+
+        .buttons button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
         }
 
         @media (min-width: 600px) {
@@ -55,25 +64,120 @@
 
 <div class="container">
     <div class="card">
-        <img src="imagens/IMG_4808.jpeg" alt="Imagem do jogo"/>
-        <p>Nesse jogo, o jogador explora um castelo medieval misterioso e sombrio, repleto de magia e perigos, onde suas escolhas definirão o rumo da aventura.
-</p>
+        <img id="cenarioImagem" src="imagens/IMG_4808.jpeg" alt="Imagem do jogo"/>
+        <p id="cenarioTexto">Você está na entrada do castelo, diante de um enorme portão de madeira. As pedras ao redor parecem sussurrar segredos antigos.</p>
     </div>
-    <div class="card">
-        <p class="linkdojogo"><a href="inicio.html">Jogar</a></p>     
+    <div class="buttons" id="buttonsContainer">
+        <button onclick="irParaCenario(1)">Entrar no castelo</button>
     </div>
 </div>
 
 <!-- Música de fundo -->
-<audio autoplay loop>
+<audio id="musicaFundo" loop>
     <source src="musica/fundo.mp3" type="audio/mpeg">
     Seu navegador não suporta a tag de áudio.
 </audio>
-<audio id="musicaFundo" loop>
-    <source src="musica/fundo.mp3" type="audio/mpeg">
-</audio>
-
 <button onclick="document.getElementById('musicaFundo').play()">Tocar Música</button>
-    
+
+<script>
+    const cenarios = [
+        {
+            imagem: "imagens/IMG_4808.jpeg",
+            texto: "Você está na entrada do castelo, diante de um enorme portão de madeira. As pedras ao redor parecem sussurrar segredos antigos.",
+            acoes: [
+                { texto: "Entrar no castelo", proximoCenario: 1 }
+            ]
+        },
+        {
+            imagem: "imagens/salao.jpeg",
+            texto: "Você entra no salão principal, um grande espaço vazio com tapeçarias velhas nas paredes.",
+            acoes: [
+                { texto: "Subir a escada", proximoCenario: 2 },
+                { texto: "Descer para o porão", proximoCenario: 3 }
+            ]
+        },
+        {
+            imagem: "imagens/biblioteca.jpeg",
+            texto: "Ao subir a escada, você entra em uma antiga biblioteca coberta de poeira e livros mágicos.",
+            acoes: [
+                { texto: "Ler um livro", proximoCenario: 4 },
+                { texto: "Explorar a sala ao lado", proximoCenario: 5 }
+            ]
+        },
+        {
+            imagem: "imagens/porao.jpeg",
+            texto: "No porão úmido e sombrio, você ouve o som de correntes arrastando.",
+            acoes: [
+                { texto: "Investigar o som", proximoCenario: 6 },
+                { texto: "Voltar ao salão principal", proximoCenario: 1 }
+            ]
+        },
+        {
+            imagem: "imagens/livro.jpeg",
+            texto: "Ao abrir o livro, você é transportado para um local desconhecido, com luzes místicas ao redor.",
+            acoes: [
+                { texto: "Explorar o local", proximoCenario: 7 },
+                { texto: "Tentar voltar para a biblioteca", proximoCenario: 2 }
+            ]
+        },
+        {
+            imagem: "imagens/tesouro.jpeg",
+            texto: "Na sala ao lado, você encontra um baú de tesouro trancado com símbolos misteriosos.",
+            acoes: [
+                { texto: "Tentar abrir o baú", proximoCenario: 8 },
+                { texto: "Voltar para a biblioteca", proximoCenario: 2 }
+            ]
+        },
+        {
+            imagem: "imagens/prisao.jpeg",
+            texto: "Você encontra uma cela no porão, onde uma criatura está presa e pede ajuda.",
+            acoes: [
+                { texto: "Libertar a criatura", proximoCenario: 9 },
+                { texto: "Ignorar e sair", proximoCenario: 3 }
+            ]
+        },
+        {
+            imagem: "imagens/jardim.jpeg",
+            texto: "Você chega a um jardim encantado, onde plantas florescem ao seu redor magicamente.",
+            acoes: [
+                { texto: "Explorar o jardim", proximoCenario: 10 },
+                { texto: "Voltar para o salão", proximoCenario: 1 }
+            ]
+        },
+        {
+            imagem: "imagens/tesouro_aberto.jpeg",
+            texto: "O baú se abre, revelando um artefato brilhante que emana poder.",
+            acoes: [
+                { texto: "Pegar o artefato", proximoCenario: 7 },
+                { texto: "Fechar o baú e sair", proximoCenario: 5 }
+            ]
+        },
+        {
+            imagem: "imagens/fim.jpeg",
+            texto: "Você explora o jardim e percebe que encontrou uma saída secreta do castelo. Parabéns, sua aventura termina aqui!",
+            acoes: [
+                { texto: "Recomeçar", proximoCenario: 0 }
+            ]
+        }
+    ];
+
+    function irParaCenario(cenarioIndex) {
+        const cenario = cenarios[cenarioIndex];
+        
+        document.getElementById('cenarioImagem').src = cenario.imagem;
+        document.getElementById('cenarioTexto').textContent = cenario.texto;
+
+        const buttonsContainer = document.getElementById('buttonsContainer');
+        buttonsContainer.innerHTML = ''; // Limpar os botões anteriores
+
+        cenario.acoes.forEach(acao => {
+            const button = document.createElement('button');
+            button.textContent = acao.texto;
+            button.onclick = () => irParaCenario(acao.proximoCenario);
+            buttonsContainer.appendChild(button);
+        });
+    }
+</script>
+
 </body>
 </html>
