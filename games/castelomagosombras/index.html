@@ -162,6 +162,17 @@
         }
     ];
 
+     // Função para pré-carregar todas as imagens
+    function preloadImages() {
+        cenarios.forEach(cenario => {
+            const img = new Image();
+            img.src = cenario.imagem;
+        });
+    }
+
+    // Chama o pré-carregamento das imagens ao carregar a página
+    window.onload = preloadImages;
+    
     function irParaCenario(cenarioIndex) {
         const cenario = cenarios[cenarioIndex];
         
