@@ -73,7 +73,7 @@
 <body>
 
 <header>
-    <button onclick="document.getElementById('musicaFundo').play()">Tocar Música</button>
+    <button id="btnMusica" onclick="musica()">Ativar Música</button>
     <button onclick="window.location.href='index.html'">Sair</button>
 </header>
 
@@ -190,6 +190,24 @@
 
     // Chama o pré-carregamento das imagens ao carregar a página
     window.onload = preloadImages;
+
+        // Função para ativar e desativar a música
+        function toggleMusic() {
+            const audio = document.getElementById("musicaFundo");
+            const button = document.getElementById("btnMusica");
+
+            if (audio.paused) {
+                audio.play();
+                button.textContent = "Desativar Música";
+            } else {
+                audio.pause();
+                button.textContent = "Ativar Música";
+            }
+        }
+
+        // Adiciona o evento de clique ao botão
+        document.getElementById("btnMusica").onclick = toggleMusic;
+    
     
     function irParaCenario(cenarioIndex) {
         const cenario = cenarios[cenarioIndex];
