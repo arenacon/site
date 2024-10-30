@@ -20,9 +20,16 @@
         }
 
         header {
+            background-color: #000;
+            color: white;
+            padding: 10px 10px;
+            text-align: center;
+        }
+
+        .titulo {
             background-color: #333;
             color: white;
-            padding: 15px 10px;
+            padding: 10px 10px;
             text-align: center;
         }
 
@@ -61,16 +68,20 @@
 <body>
 
 <header>
-    <h3>Castelo do Mago da Sombra</h3>
+    <button onclick="document.getElementById('musicaFundo').play()">Tocar Música</button>
+    <button onclick="locate('index.html')">Sair</button>
 </header>
 
+<div class="titulo">
+    <h3>Castelo do Mago da Sombra</h3>
+</div>
+    
 <div class="container">
     <div class="card">
         <img id="cenarioImagem" src="imagens/IMG_4808.jpeg" alt="Imagem do jogo"/>
         <p id="cenarioTexto">Você está na entrada do castelo, diante de um enorme portão de madeira. As pedras ao redor parecem sussurrar segredos antigos.</p>
     </div>
     <div class="buttons" id="buttonsContainer">
-        <button onclick="document.getElementById('musicaFundo').play()">Tocar Música</button>
         <button onclick="irParaCenario(1)">Entrar no castelo</button>
     </div>
 </div>
