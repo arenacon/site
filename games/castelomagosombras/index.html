@@ -109,7 +109,7 @@
         },
         {// 1 - Salão Principal do Castelo
             imagem: "imagens/IMG_4799.jpeg",
-            texto: "Você entra no salão principal, um grande espaço vazio com tapete velho no chão, uma escadaria na esquerda e uma porta aberta na direita.",
+            texto: "Você entra no salão principal, um grande espaço vazio com tapete velho no chão, uma escadaria na esquerda e uma porta na direita.",
             acoes: [
                 { texto: "Subir a escada", proximoCenario: 2 },
                 { texto: "Entrar na porta da direita", proximoCenario: 3 }
@@ -155,23 +155,26 @@
                 { texto: "Parar de observar", proximoCenario: 5 }
             ]
         },
-        {// 7 - 
+        {// 7 - Porta da direita salão principal
             imagem: "imagens/jardim.jpeg",
-            texto: "Você chega a um jardim encantado, onde plantas florescem ao seu redor magicamente.",
+            texto: "Você chega até a porta e descobre que ela possui uma fechadura mecânica de engrenagens com letras. Você precisa montar uma palavra secreta para abrir.",
             acoes: [
-                { texto: "Explorar o jardim", proximoCenario: 10 },
+                { texto: "Palavra: ABRACADABRA", proximoCenario: 10 },
+                { texto: "Palavra: MAGODASOMBRA", proximoCenario: 10 },
+                { texto: "Palavra: MERLIN", proximoCenario: 8 },
+                { texto: "Palavra: MAGICA", proximoCenario: 10 },
                 { texto: "Voltar para o salão", proximoCenario: 1 }
             ]
         },
-        {
-            imagem: "imagens/tesouro_aberto.jpeg",
-            texto: "O baú se abre, revelando um artefato brilhante que emana poder.",
+        {// 8 - Corredor principal
+            imagem: "imagens/IMG_4804.jpeg",
+            texto: "Você entra num salão amplo com várias luzes e um chão com superfície espelhada, e apenas uma porta ao fundo.",
             acoes: [
-                { texto: "Pegar o artefato", proximoCenario: 7 },
-                { texto: "Fechar o baú e sair", proximoCenario: 5 }
+                { texto: "Entrar ma porta", proximoCenario: 9 },
+                { texto: "Voltar para o Salão Principal", proximoCenario: 1 }
             ]
         },
-        {
+        {// 9 - Calabouç
             imagem: "imagens/fim.jpeg",
             texto: "Você explora o jardim e percebe que encontrou uma saída secreta do castelo. Parabéns, sua aventura termina aqui!",
             acoes: [
