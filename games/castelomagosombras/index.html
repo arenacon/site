@@ -100,43 +100,44 @@
 
 <script>
     const cenarios = [
-        {
+        {// 0 - Entrada do Castelo
             imagem: "imagens/IMG_4808.jpeg",
             texto: "Você está na entrada do castelo, diante de um enorme portão. Vocé precisa resgatar um amigo capturado pelo enigmático Mago da Sombra. O Castelo do Mago é um lugar cheio de segredos e enigmas.",
             acoes: [
                 { texto: "Entrar no castelo", proximoCenario: 1 }
             ]
         },
-        {
+        {// 1 - Salão Principal do Castelo
             imagem: "imagens/IMG_4799.jpeg",
-            texto: "Você entra no salão principal, um grande espaço vazio com tapeçarias velhas nas paredes.",
+            texto: "Você entra no salão principal, um grande espaço vazio com tapete velho no chão, uma escadaria na esquerda e uma porta aberta na direita.",
             acoes: [
                 { texto: "Subir a escada", proximoCenario: 2 },
-                { texto: "Descer para o porão", proximoCenario: 3 }
+                { texto: "Entrar na porta da direita", proximoCenario: 3 }
             ]
         },
-        {
-            imagem: "imagens/IMG_4800.jpeg",
-            texto: "Ao subir a escada, você entra em uma antiga biblioteca coberta de poeira e livros mágicos.",
+        {// 2 - Corredor de cima
+            imagem: "imagens/IMG_4813.jpeg",
+            texto: "Ao subir a escada, você entra num imenso corredor com 3 portas",
             acoes: [
-                { texto: "Ler um livro", proximoCenario: 10 },
-                { texto: "Explorar a sala ao lado", proximoCenario: 5 }
+                { texto: "Entrar na porta da Esquerda", proximoCenario: 10 },
+                { texto: "Entrar na porta do Meio", proximoCenario: 5 }
+                { texto: "Entrar na porta da Direita", proximoCenario: 5 }
+                { texto: "Voltar para o Salão Principal", proximoCenario: 1 }
             ]
         },
-        {
+        {// 3 - Biblioteca
             imagem: "imagens/IMG_4805.jpeg",
-            texto: "No porão úmido e sombrio, você ouve o som de correntes arrastando.",
+            texto: "Na porta da Esquerda, você entra numa biblioteca repleta de livros misteriosos e uma pequena mesa com um livro aberto.",
             acoes: [
-                { texto: "Investigar o som", proximoCenario: 6 },
-                { texto: "Voltar ao salão principal", proximoCenario: 1 }
+                { texto: "Observar o livro aberto", proximoCenario: 4 },
+                { texto: "Voltar para o corredor", proximoCenario: 2 }
             ]
         },
-        {
+        {// 4 - Livro aberto
             imagem: "imagens/livro.jpeg",
-            texto: "Ao abrir o livro, você é transportado para um local desconhecido, com luzes místicas ao redor.",
+            texto: "Ao observar o livro, você percebe a palavra MERLIN.",
             acoes: [
-                { texto: "Explorar o local", proximoCenario: 7 },
-                { texto: "Tentar voltar para a biblioteca", proximoCenario: 2 }
+                { texto: "Parar de observar", proximoCenario: 3 },
             ]
         },
         {
