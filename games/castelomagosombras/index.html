@@ -166,28 +166,56 @@
                 { texto: "Voltar para o salão", proximoCenario: 1 }
             ]
         },
-        {// 8 - Corredor principal
+        {// 8 - Salão Espelhado
             imagem: "imagens/IMG_4804.jpeg",
-            texto: "Você entra num salão amplo com várias luzes e um chão com superfície espelhada, e apenas uma porta ao fundo.",
+            texto: "Você entra num salão amplo espelhado com várias luzes e um chão com superfície espelhada, e apenas uma porta ao fundo.",
             acoes: [
                 { texto: "Entrar ma porta", proximoCenario: 9 },
                 { texto: "Voltar para o Salão Principal", proximoCenario: 1 }
             ]
         },
-        {// 9 - Calabouç
-            imagem: "imagens/fim.jpeg",
-            texto: "Você explora o jardim e percebe que encontrou uma saída secreta do castelo. Parabéns, sua aventura termina aqui!",
+        {// 9 - Escadaria Externa
+            imagem: "imagens/IMG_4820.jpeg",
+            texto: "Você sai e encontra uma escadaria que vai até uma porta abaixo.",
             acoes: [
-                { texto: "Recomeçar", proximoCenario: 0 }
+                { texto: "Entrar ma porta", proximoCenario: 11 },
+                { texto: "Voltar para o Salão Espelhado", proximoCenario: 8 }
             ]
         },     
-        {
+        {// 10 - Foi pego
             imagem: "imagens/IMG_4810.jpeg",
             texto: "O mago da sombra aprisionou você! Tente novamente.",
             acoes: [
                 { texto: "Recomeçar", proximoCenario: 0 }
             ]
-        }   
+        },
+        {// 11 - Calabouço
+            imagem: "imagens/IMG_4805.jpeg",
+            texto: "Você entra num calabouço com 3 portas.",
+            acoes: [
+                { texto: "Entrar ma porta da Esquerda", proximoCenario: 10 },
+                { texto: "Entrar ma porta do final do corredor", proximoCenario: 10 },
+                { texto: "Entrar ma porta da Direita", proximoCenario: 12 },
+                { texto: "Voltar para a escadaria externa", proximoCenario: 9 }
+            ]
+        },
+        {// 12 - Cela do amigo
+            imagem: "imagens/IMG_4821.jpeg",
+            texto: "Você encontra seu amigo acorrentado e sentado no chão, porém o Mago da Sombra está de costas na mesma sala.",
+            acoes: [
+                { texto: "Ajuda seu amigo a escapar silenciosamente", proximoCenario: 10 },
+                { texto: "Ajuda seu amigo e ambos atacam o Mago", proximoCenario: 12 },
+                { texto: "Ameaça o Mago com mágica", proximoCenario: 10 },
+                { texto: "Voltar para o corredor do calabouço", proximoCenario: 10 }
+            ]
+        },
+        {// 13 - Fim
+            imagem: "imagens/IMG_4822.jpeg",
+            texto: "PARABÉNS! Você e seu amigo conseguiram derrotar o Mago da Sombra juntos e escaparam do castelo.",
+            acoes: [
+                { texto: "Jogar Novamente", proximoCenario: 0 }
+            ]
+        }
     ];
 
      // Função para pré-carregar todas as imagens
