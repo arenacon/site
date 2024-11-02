@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Mistério da Floresta do Esquilo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: white;
+        }
+
+        img {
+            width: 100%;
+            max-height: 600px;
+            object-fit: cover;
+        }
+
+        header {
+            background-color: #660000;
+            color: white;
+            padding: 10px 10px;
+            text-align: center;
+        }
+
+        header button {
+            font-size: 16px;
+            color: black;
+        }
+
+        .titulo {
+            background-color: #333;
+            color: white;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .container {
+            padding: 0px 15px 5px 10px;
+        }
+
+        .card {
+            background-color: black;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 0px;
+            padding: 15px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 0px;      
+        }
+
+        .buttons button {
+            margin: 5px;
+            padding: 0px 20px;
+            font-size: 16px;
+            color: black;
+        }
+
+        @media (min-width: 600px) {
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <button id="btnMusica" onclick="musica()">Ativar Música</button>
+    <button onclick="window.location.href='index.html'">Reiniciar</button>
+</header>
+
+<div class="titulo">
+    <h3>O Mistério da Floresta do Esquilo</h3>
+</div>
+    
+<div class="container">
+    <div class="card">
+        <img id="cenarioImagem" src="imagens/IMG_4823.jpeg" alt="Imagem do jogo"/>
+        <p id="cenarioTexto">Você está na entrada do castelo, diante de um enorme portão. Vocé precisa resgatar um amigo capturado pelo enigmático Mago da Sombra. O Castelo do Mago é um lugar cheio de segredos e enigmas. Ative a música para uma melhor experiência do jogo.</p>
+    </div>
+    <div class="buttons" id="buttonsContainer">
+        <button onclick="irParaCenario(1)">Entrar no castelo</button>
+    </div>
+</div>
+
+<!-- Música de fundo -->
+<audio id="musicaFundo" loop>
+    <source src="musica/fundo.mp3" type="audio/mpeg">
+    Seu navegador não suporta a tag de áudio.
+</audio>
+
+
+<script>
+    const cenarios = [
+        {// 0 - Entrada do Castelo
+            imagem: "imagens/IMG_4823.jpeg",
+            texto: "Você está na entrada do castelo, diante de um enorme portão. Vocé precisa resgatar um amigo capturado pelo enigmático Mago da Sombra. O Castelo do Mago é um lugar cheio de segredos e enigmas.",
+            acoes: [
+                { texto: "Entrar no castelo", proximoCenario: 1 }
+            ]
+        },
+        {// 1 - Salão Principal do Castelo
+            imagem: "imagens/IMG_4799.jpeg",
+            texto: "Você entra no salão principal, um grande espaço vazio com tapete velho no chão, uma escadaria na esquerda e uma porta na direita.",
+            acoes: [
+                { texto: "Subir a escada", proximoCenario: 2 },
+                { texto: "Entrar na porta da direita", proximoCenario: 7 }
+            ]
+        },
+        {// 2 - Corredor de cima
+            imagem: "imagens/IMG_4813.jpeg",
+            texto: "Ao subir a escada, você entra num imenso corredor com 3 portas",
+            acoes: [
+                { texto: "Entrar na porta da Esquerda", proximoCenario: 3 },
+                { texto: "Entrar na porta do Meio", proximoCenario: 5 },
+                { texto: "Entrar na porta da Direita", proximoCenario: 10 },
+                { texto: "Voltar para o Salão Principal", proximoCenario: 1 }
+            ]
+        },
+        {// 3 - Biblioteca
+            imagem: "imagens/IMG_4800.jpeg",
+            texto: "Na porta da Esquerda, você entra numa biblioteca repleta de livros misteriosos e uma pequena mesa com um livro aberto.",
+            acoes: [
+                { texto: "Observar o livro aberto", proximoCenario: 4 },
+                { texto: "Voltar para o corredor", proximoCenario: 2 }
+            ]
+        },
+        {// 4 - Livro aberto
+            imagem: "imagens/IMG_4814.jpeg",
+            texto: "Ao observar o livro, você percebe que o livro foi escrito por MERLIN",
+            acoes: [
+                { texto: "Parar de observar", proximoCenario: 3 }
+            ]
+        },
+        {// 5 - Observatório
+            imagem: "imagens/IMG_4803.jpeg",
+            texto: "Na porta do Meio, você entra no observatório do castelo, onde é possivel observar a parte externa do castelo.",
+            acoes: [
+                { texto: "Observar pela janela", proximoCenario: 6 },
+                { texto: "Voltar para o corredor", proximoCenario: 2 }
+            ]
+        },
+        {// 6 - Área externa
+            imagem: "imagens/IMG_4818.jpeg",
+            texto: "Você observa pela janela, percebe que o castelo é imenso e que há muitas áreas para explorar.",
+            acoes: [
+                { texto: "Parar de observar", proximoCenario: 5 }
+            ]
+        },
+        {// 7 - Porta da direita salão principal
+            imagem: "imagens/IMG_4819.jpeg",
+            texto: "Você chega até a porta e descobre que ela possui uma fechadura mecânica de engrenagens com letras. Você precisa montar uma palavra secreta para abrir.",
+            acoes: [
+                { texto: "Palavra: ABRACADABRA", proximoCenario: 10 },
+                { texto: "Palavra: MAGODASOMBRA", proximoCenario: 10 },
+                { texto: "Palavra: MERLIN", proximoCenario: 8 },
+                { texto: "Palavra: MAGICA", proximoCenario: 10 },
+                { texto: "Voltar para o salão", proximoCenario: 1 }
+            ]
+        },
+        {// 8 - Salão Espelhado
+            imagem: "imagens/IMG_4804.jpeg",
+            texto: "Você entra num salão amplo espelhado com várias luzes e um chão com superfície espelhada, e apenas uma porta ao fundo.",
+            acoes: [
+                { texto: "Entrar na porta", proximoCenario: 9 },
+                { texto: "Voltar para o Salão Principal", proximoCenario: 1 }
+            ]
+        },
+        {// 9 - Escadaria Externa
+            imagem: "imagens/IMG_4820.jpeg",
+            texto: "Você sai e encontra uma escadaria externa que vai até uma porta abaixo.",
+            acoes: [
+                { texto: "Entrar na porta", proximoCenario: 11 },
+                { texto: "Voltar para o Salão Espelhado", proximoCenario: 8 }
+            ]
+        },     
+        {// 10 - Foi pego
+            imagem: "imagens/IMG_4810.jpeg",
+            texto: "O mago da sombra aprisionou você! Tente novamente.",
+            acoes: [
+                { texto: "Recomeçar", proximoCenario: 0 }
+            ]
+        },
+        {// 11 - Calabouço
+            imagem: "imagens/IMG_4805.jpeg",
+            texto: "Você entra num calabouço com 3 portas.",
+            acoes: [
+                { texto: "Entrar na porta da Esquerda", proximoCenario: 10 },
+                { texto: "Entrar na porta do final do corredor", proximoCenario: 10 },
+                { texto: "Entrar na porta da Direita", proximoCenario: 12 },
+                { texto: "Voltar para a escadaria externa", proximoCenario: 9 }
+            ]
+        },
+        {// 12 - Cela do amigo
+            imagem: "imagens/IMG_4821.jpeg",
+            texto: "Você encontra seu amigo acorrentado e sentado no chão, porém o Mago da Sombra está de costas na mesma sala.",
+            acoes: [
+                { texto: "Ajuda seu amigo a escapar silenciosamente", proximoCenario: 10 },
+                { texto: "Ajuda seu amigo e ambos atacam o Mago", proximoCenario: 13 },
+                { texto: "Ameaça o Mago com mágica", proximoCenario: 10 },
+                { texto: "Voltar para o corredor do calabouço", proximoCenario: 10 }
+            ]
+        },
+        {// 13 - Fim
+            imagem: "imagens/IMG_4822.jpeg",
+            texto: "PARABÉNS! Você e seu amigo conseguiram derrotar o Mago da Sombra juntos e escaparam do castelo.",
+            acoes: [
+                { texto: "Jogar Novamente", proximoCenario: 0 }
+            ]
+        }
+    ];
+
+     // Função para pré-carregar todas as imagens
+    function preloadImages() {
+        cenarios.forEach(cenario => {
+            const img = new Image();
+            img.src = cenario.imagem;
+        });
+    }
+
+    // Chama o pré-carregamento das imagens ao carregar a página
+    window.onload = preloadImages;
+
+        // Função para ativar e desativar a música
+        function toggleMusic() {
+            const audio = document.getElementById("musicaFundo");
+            const button = document.getElementById("btnMusica");
+
+            if (audio.paused) {
+                audio.play();
+                button.textContent = "Desativar Música";
+            } else {
+                audio.pause();
+                button.textContent = "Ativar Música";
+            }
+        }
+
+        // Adiciona o evento de clique ao botão
+        document.getElementById("btnMusica").onclick = toggleMusic;
+    
+    
+    function irParaCenario(cenarioIndex) {
+        const cenario = cenarios[cenarioIndex];
+        
+        document.getElementById('cenarioImagem').src = cenario.imagem;
+        document.getElementById('cenarioTexto').textContent = cenario.texto;
+
+        const buttonsContainer = document.getElementById('buttonsContainer');
+        buttonsContainer.innerHTML = ''; // Limpar os botões anteriores
+
+        cenario.acoes.forEach(acao => {
+            const button = document.createElement('button');
+            button.textContent = acao.texto;
+            button.onclick = () => irParaCenario(acao.proximoCenario);
+            buttonsContainer.appendChild(button);
+        });
+    }
+</script>
+
+</body>
+</html>
