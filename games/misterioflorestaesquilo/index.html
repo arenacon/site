@@ -215,60 +215,106 @@
                 { texto: "Desistir de abrir", proximoCenario: 11 }
             ]
         },
-        {// 13 - Fim
-            imagem: "imagens/IMG_4822.jpeg",
-            texto: "PARABÉNS",
+        {// 13 - Fim do jogo (erro no baú)
+            imagem: "imagens/IMG_4854.jpeg",
+            texto: "ERROU! Você errou a combinação e a casa toda explodiu sem deixar vestígios.",
             acoes: [
-                { texto: "Jogar", proximoCenario: 0 }
+                { texto: "Jogar novamente", proximoCenario: 0 }
             ]
         },
-        {// 13 - Fim
-            imagem: "imagens/IMG_4822.jpeg",
-            texto: "PARABÉNS",
+        {// 14 - Baú aberto (Sala Secreta)
+            imagem: "imagens/IMG_4856.jpeg",
+            texto: "Você conseguiu abrir o baú e descobre uma passagem secreta. E entra numa outra sala e percebe que o esquilo misterioso está sobre um móvel.",
             acoes: [
-                { texto: "Jogar", proximoCenario: 0 }
+                { texto: "Falar OI para o Esquilo", proximoCenario: 21 },
+                { texto: "Capturar o Esquilo", proximoCenario: 22 }
             ]
         },
-        {// 13 - Fim
-            imagem: "imagens/IMG_4822.jpeg",
-            texto: "PARABÉNS",
+        {// 15 - Porta 2 o banheiro
+            imagem: "imagens/IMG_4857.jpeg",
+            texto: "Você entrou na porta 2 e está agora em um banheiro.",
             acoes: [
-                { texto: "Jogar", proximoCenario: 0 }
+                { texto: "Observar a pia", proximoCenario: 16 },
+                { texto: "Voltar para o corredor", proximoCenario: 10 }
             ]
         },
-        {// 13 - Fim
-            imagem: "imagens/IMG_4822.jpeg",
-            texto: "PARABÉNS",
+        {// 16 - Pia do banheiro da Porta 2
+            imagem: "imagens/IMG_4858.jpeg",
+            texto: "Você aproxima-se para observar a pia e encontra vários restos de cabelo e uma tesoura estranha. Parece que foi usada recentemente.",
             acoes: [
-                { texto: "Jogar", proximoCenario: 0 }
+                { texto: "Parar de observar", proximoCenario: 15 }
             ]
         },
-        {// 13 - Fim
-            imagem: "imagens/IMG_4822.jpeg",
-            texto: "PARABÉNS",
+        {// 17 - Porta 3 dormitório
+            imagem: "imagens/IMG_4860.jpeg",
+            texto: "Você entrou na porta 3 e está agora em um quarto.",
             acoes: [
-                { texto: "Jogar", proximoCenario: 0 }
+                { texto: "Observar o relógio de parede", proximoCenario: 18 },
+                { texto: "Voltar para o corredor", proximoCenario: 10 }
             ]
         },
-        {// 13 - Fim
-            imagem: "imagens/IMG_4822.jpeg",
-            texto: "PARABÉNS",
+        {// 18 - Relógio de parede da Porta 3
+            imagem: "imagens/IMG_4863.jpeg",
+            texto: "Você aproxima-se para observar o relógio, mas ele não funciona. Está travado num único horário.",
             acoes: [
-                { texto: "Jogar", proximoCenario: 0 }
+                { texto: "Parar de observar", proximoCenario: 17 }
             ]
         },
-        {// 13 - Fim
-            imagem: "imagens/IMG_4822.jpeg",
-            texto: "PARABÉNS",
+        {// 19 - Porta 4 sala do livro
+            imagem: "imagens/IMG_4866.jpeg",
+            texto: "Você entrou na porta 4 e há apenas um livro no chão.",
             acoes: [
-                { texto: "Jogar", proximoCenario: 0 }
+                { texto: "Observar o livro", proximoCenario: 20 },
+                { texto: "Voltar para o corredor", proximoCenario: 10 }
             ]
         },
-        {// 13 - Fim
-            imagem: "imagens/IMG_4822.jpeg",
-            texto: "PARABÉNS",
+        {// 20 - Livro da porta 4
+            imagem: "imagens/IMG_4867.jpeg",
+            texto: "Você observa o livro e lê o título em uma linguagem estranha: Otinifni Aum, de autor desconhecido.",
             acoes: [
-                { texto: "Jogar", proximoCenario: 0 }
+                { texto: "Parar de observar", proximoCenario: 19 }
+            ]
+        },
+        {// 21 - Sala Secreta Diálogo (1)
+            imagem: "imagens/IMG_4869.jpeg",
+            texto: "Você fica muito surpreso ao saber que o esquilo também fala. Responda a pergunta que ele fez a você. ",
+            acoes: [
+                { texto: "Vim capturar você", proximoCenario: 22 },
+                { texto: "Vim desvendar o mistério do sumiço dos animais", proximoCenario: 23 },
+                { texto: "Vim destruir a floresta", proximoCenario: 22 }
+            ]
+        },
+        {// 22 - Fim do jogo (esquilo explodiu a casa)
+            imagem: "imagens/IMG_4854.jpeg",
+            texto: "ERROU! O esquilo fugiu e explodiu toda a casa sem deixar vestígios.",
+            acoes: [
+                { texto: "Jogar novamente", proximoCenario: 0 }
+            ]
+        },
+        {// 23 - Sala Secreta Diálogo (2)
+            imagem: "imagens/IMG_4873.jpeg",
+            texto: "Responda novamente a pergunta que ele fez a você.",
+            acoes: [
+                { texto: "Eles podem estar precisando de ajuda", proximoCenario: 24 },
+                { texto: "Vim capturar o responsável por isso", proximoCenario: 22 },
+                { texto: "Vou pegá-los pra vender", proximoCenario: 22 }
+            ]
+        },
+        {// 24 - Sala Secreta Diálogo (3)
+            imagem: "imagens/IMG_4872.jpeg",
+            texto: "Responda novamente a pergunta que ele fez a você.",
+            acoes: [
+                { texto: "Não é da sua conta", proximoCenario: 22 },
+                { texto: "Sou o Jefinho do Rage", proximoCenario: 22 },
+                { texto: "Sou do bem. Onde eles estão?", proximoCenario: 25 }
+            ]
+        },
+        {// 25 - Sala Secreta Diálogo (4)
+            imagem: "imagens/IMG_4874.jpeg",
+            texto: "Então o esquilo pede algo a você.",
+            acoes: [
+                { texto: "Ok", proximoCenario: 26 },
+                { texto: "Não abro", proximoCenario: 22 }
             ]
         },
         {// 13 - Fim
