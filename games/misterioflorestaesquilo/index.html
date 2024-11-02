@@ -84,136 +84,233 @@
 <div class="container">
     <div class="card">
         <img id="cenarioImagem" src="imagens/IMG_4823.jpeg" alt="Imagem do jogo"/>
-        <p id="cenarioTexto">Você está na entrada do castelo, diante de um enorme portão. Vocé precisa resgatar um amigo capturado pelo enigmático Mago da Sombra. O Castelo do Mago é um lugar cheio de segredos e enigmas. Ative a música para uma melhor experiência do jogo.</p>
+        <p id="cenarioTexto">Em algum lugar no interior do Brasil, havia uma floresta bela e tranquila onde vários animais viviam felizes e saltitantes. Até que um dia, um ser misterioso chegou e tudo se transformou em escuridão. Todos os animais da floresta sumiram misteriosamente, porém, alguns relatos de viajantes contam que um esquilo ainda pode ser visto durante as noites frias próximo a uma casa misteriosa no meio da floresta. Ative a música para uma melhor experiência do jogo.</p>
     </div>
     <div class="buttons" id="buttonsContainer">
-        <button onclick="irParaCenario(1)">Entrar no castelo</button>
+        <button onclick="irParaCenario(0)">Investigar o Mistério</button>
     </div>
 </div>
 
 <!-- Música de fundo -->
 <audio id="musicaFundo" loop>
-    <source src="musica/fundo.mp3" type="audio/mpeg">
+    <source src="musicas/fundo.mp3" type="audio/mpeg">
     Seu navegador não suporta a tag de áudio.
 </audio>
 
 
 <script>
     const cenarios = [
-        {// 0 - Entrada do Castelo
-            imagem: "imagens/IMG_4823.jpeg",
-            texto: "Você está na entrada do castelo, diante de um enorme portão. Vocé precisa resgatar um amigo capturado pelo enigmático Mago da Sombra. O Castelo do Mago é um lugar cheio de segredos e enigmas.",
+        {// 0  - Início da Floresta
+            imagem: "imagens/IMG_4831.jpeg",
+            texto: "Você está no início do caminho da floresta. Os relatos indicam que o esquilo foi visto neste caminho.",
             acoes: [
-                { texto: "Entrar no castelo", proximoCenario: 1 }
+                { texto: "Seguir em frente", proximoCenario: 1 }
             ]
         },
-        {// 1 - Salão Principal do Castelo
-            imagem: "imagens/IMG_4799.jpeg",
-            texto: "Você entra no salão principal, um grande espaço vazio com tapete velho no chão, uma escadaria na esquerda e uma porta na direita.",
+        {// 1 - Meio da floresta 
+            imagem: "imagens/IMG_4833.jpeg",
+            texto: "Você está no meio do caminho da floresta.",
             acoes: [
-                { texto: "Subir a escada", proximoCenario: 2 },
-                { texto: "Entrar na porta da direita", proximoCenario: 7 }
+                { texto: "Seguir em frente", proximoCenario: 2 },
+                { texto: "Voltar para o início", proximoCenario: 0 }
             ]
         },
-        {// 2 - Corredor de cima
-            imagem: "imagens/IMG_4813.jpeg",
-            texto: "Ao subir a escada, você entra num imenso corredor com 3 portas",
+        {// 2 - Frente da casa
+            imagem: "imagens/IMG_4834.jpeg",
+            texto: "Você chegou ao final do caminho e está na frente da casa misteriosa.",
             acoes: [
-                { texto: "Entrar na porta da Esquerda", proximoCenario: 3 },
-                { texto: "Entrar na porta do Meio", proximoCenario: 5 },
-                { texto: "Entrar na porta da Direita", proximoCenario: 10 },
-                { texto: "Voltar para o Salão Principal", proximoCenario: 1 }
+                { texto: "Ir até a porta", proximoCenario: 3 },
+                { texto: "Voltar para o caminho", proximoCenario: 1 }
             ]
         },
-        {// 3 - Biblioteca
-            imagem: "imagens/IMG_4800.jpeg",
-            texto: "Na porta da Esquerda, você entra numa biblioteca repleta de livros misteriosos e uma pequena mesa com um livro aberto.",
+        {// 3 - Porta da casa (1)
+            imagem: "imagens/IMG_4838.jpeg",
+            texto: "Você chegou diante da porta da casa misteriosa. Também há dois vasos de plantas ao lado da porta.",
             acoes: [
-                { texto: "Observar o livro aberto", proximoCenario: 4 },
-                { texto: "Voltar para o corredor", proximoCenario: 2 }
+                { texto: "Bater na porta", proximoCenario: 4 },
+                { texto: "Entrar na casa", proximoCenario: 5 },
+                { texto: "Voltar para o caminho", proximoCenario: 1 }
             ]
         },
-        {// 4 - Livro aberto
-            imagem: "imagens/IMG_4814.jpeg",
-            texto: "Ao observar o livro, você percebe que o livro foi escrito por MERLIN",
+        {// 4 - Porta da casa (2)
+            imagem: "imagens/IMG_4838.jpeg",
+            texto: "Você bateu na porta da casa mas ninguém apareceu.",
             acoes: [
-                { texto: "Parar de observar", proximoCenario: 3 }
+                { texto: "Entrar na casa", proximoCenario: 5 },
+                { texto: "Voltar para o caminho", proximoCenario: 1 }
             ]
         },
-        {// 5 - Observatório
-            imagem: "imagens/IMG_4803.jpeg",
-            texto: "Na porta do Meio, você entra no observatório do castelo, onde é possivel observar a parte externa do castelo.",
+        {// 5 - Porta da casa (3)
+            imagem: "imagens/IMG_4838.jpeg",
+            texto: "Você tentou entrar, mas a porta foi trancada com chave.",
             acoes: [
-                { texto: "Observar pela janela", proximoCenario: 6 },
-                { texto: "Voltar para o corredor", proximoCenario: 2 }
+                { texto: "Procurar no vaso de planta ", proximoCenario: 5 },
+                { texto: "Voltar para o caminho", proximoCenario: 1 }
             ]
         },
-        {// 6 - Área externa
-            imagem: "imagens/IMG_4818.jpeg",
-            texto: "Você observa pela janela, percebe que o castelo é imenso e que há muitas áreas para explorar.",
+        {// 6 - Porta da casa (4)
+            imagem: "imagens/IMG_4838.jpeg",
+            texto: "Você encontrou uma chave dentro do vaso de planta.",
             acoes: [
-                { texto: "Parar de observar", proximoCenario: 5 }
+                { texto: "Usar a chave na porta", proximoCenario: 7 },
+                { texto: "Voltar para o caminho", proximoCenario: 1 }
             ]
         },
-        {// 7 - Porta da direita salão principal
-            imagem: "imagens/IMG_4819.jpeg",
-            texto: "Você chega até a porta e descobre que ela possui uma fechadura mecânica de engrenagens com letras. Você precisa montar uma palavra secreta para abrir.",
+        {// 7 - Sala da casa (esquerda)
+            imagem: "imagens/IMG_4837.jpeg",
+            texto: "Você entrou na casa misteriosa de madeira e está numa sala com móveis antigos. Parece que a casa não está abandonada.",
             acoes: [
-                { texto: "Palavra: ABRACADABRA", proximoCenario: 10 },
-                { texto: "Palavra: MAGODASOMBRA", proximoCenario: 10 },
-                { texto: "Palavra: MERLIN", proximoCenario: 8 },
-                { texto: "Palavra: MAGICA", proximoCenario: 10 },
-                { texto: "Voltar para o salão", proximoCenario: 1 }
+                { texto: "Virar para a direita", proximoCenario: 9 },
+                { texto: "Abrir gaveta do móvel", proximoCenario: 8 },
+                { texto: "Sair da casa", proximoCenario: 2 }
             ]
         },
-        {// 8 - Salão Espelhado
-            imagem: "imagens/IMG_4804.jpeg",
-            texto: "Você entra num salão amplo espelhado com várias luzes e um chão com superfície espelhada, e apenas uma porta ao fundo.",
+        {// 8 - Gaveta do móvel da sala
+            imagem: "imagens/IMG_4840.jpeg",
+            texto: "Você encontrou um documento com a seguinte mensagem: Tudo correndo bem com o meu plano. Vocês não irão encontrar o meu segredo. Não vai adiantar vir com suas armas. Assinado: Senhor M.",
             acoes: [
-                { texto: "Entrar na porta", proximoCenario: 9 },
-                { texto: "Voltar para o Salão Principal", proximoCenario: 1 }
+                { texto: "Fechar gaveta", proximoCenario: 7 }
             ]
         },
-        {// 9 - Escadaria Externa
-            imagem: "imagens/IMG_4820.jpeg",
-            texto: "Você sai e encontra uma escadaria externa que vai até uma porta abaixo.",
+        {// 9 - Sala da casa (direita)
+            imagem: "imagens/IMG_4839.jpeg",
+            texto: "Você está observando o outro lado da sala. Há uma porta para o interior da casa.",
             acoes: [
-                { texto: "Entrar na porta", proximoCenario: 11 },
-                { texto: "Voltar para o Salão Espelhado", proximoCenario: 8 }
+                { texto: "Virar para a esquerda", proximoCenario: 7 },
+                { texto: "Entrar na porta", proximoCenario: 10 },
+                { texto: "Sair da casa", proximoCenario: 2 }
             ]
         },     
-        {// 10 - Foi pego
-            imagem: "imagens/IMG_4810.jpeg",
-            texto: "O mago da sombra aprisionou você! Tente novamente.",
+        {// 10 - Corredor da casa
+            imagem: "imagens/IMG_4841.jpeg",
+            texto: "Você entrou num corredor que possui 4 portas e o final do corredor.",
             acoes: [
-                { texto: "Recomeçar", proximoCenario: 0 }
+                { texto: "Entrar na porta 1", proximoCenario: 11 },
+                { texto: "Entrar na porta 2", proximoCenario: 15 },
+                { texto: "Entrar na porta 3", proximoCenario: 17 },
+                { texto: "Entrar na porta 4", proximoCenario: 19 },
+                { texto: "Voltar pra sala", proximoCenario: 7 }
             ]
         },
-        {// 11 - Calabouço
-            imagem: "imagens/IMG_4805.jpeg",
-            texto: "Você entra num calabouço com 3 portas.",
+        {// 11 - Porta 1 com o baú 
+            imagem: "imagens/IMG_4846.jpeg",
+            texto: "Você entrou na sala da porta 1 e encontrou um grande baú trancado por um cadeado de senha numérica.",
             acoes: [
-                { texto: "Entrar na porta da Esquerda", proximoCenario: 10 },
-                { texto: "Entrar na porta do final do corredor", proximoCenario: 10 },
-                { texto: "Entrar na porta da Direita", proximoCenario: 12 },
-                { texto: "Voltar para a escadaria externa", proximoCenario: 9 }
+                { texto: "Tentar abrir o baú", proximoCenario: 12 },
+                { texto: "Voltar para o corredor ", proximoCenario: 10 }
             ]
         },
-        {// 12 - Cela do amigo
-            imagem: "imagens/IMG_4821.jpeg",
-            texto: "Você encontra seu amigo acorrentado e sentado no chão, porém o Mago da Sombra está de costas na mesma sala.",
+        {// 12 - Baú da porta 1
+            imagem: "imagens/IMG_4850.jpeg",
+            texto: "Você precisa acertar a combinação numérica para abrir o baú, mas tome cuidado, algo pode acontecer se errar. Qual a combinação?",
             acoes: [
-                { texto: "Ajuda seu amigo a escapar silenciosamente", proximoCenario: 10 },
-                { texto: "Ajuda seu amigo e ambos atacam o Mago", proximoCenario: 13 },
-                { texto: "Ameaça o Mago com mágica", proximoCenario: 10 },
-                { texto: "Voltar para o corredor do calabouço", proximoCenario: 10 }
+                { texto: "725", proximoCenario: 13 },
+                { texto: "137", proximoCenario: 13 },
+                { texto: "892", proximoCenario: 13 },
+                { texto: "027", proximoCenario: 13 },
+                { texto: "350", proximoCenario: 14 },
+                { texto: "342", proximoCenario: 13 },
+                { texto: "397", proximoCenario: 13 },
+                { texto: "138", proximoCenario: 13 },
+                { texto: "Desistir de abrir", proximoCenario: 11 }
             ]
         },
         {// 13 - Fim
             imagem: "imagens/IMG_4822.jpeg",
-            texto: "PARABÉNS! Você e seu amigo conseguiram derrotar o Mago da Sombra juntos e escaparam do castelo.",
+            texto: "PARABÉNS",
             acoes: [
-                { texto: "Jogar Novamente", proximoCenario: 0 }
+                { texto: "Jogar", proximoCenario: 0 }
+            ]
+        },
+        {// 13 - Fim
+            imagem: "imagens/IMG_4822.jpeg",
+            texto: "PARABÉNS",
+            acoes: [
+                { texto: "Jogar", proximoCenario: 0 }
+            ]
+        },
+        {// 13 - Fim
+            imagem: "imagens/IMG_4822.jpeg",
+            texto: "PARABÉNS",
+            acoes: [
+                { texto: "Jogar", proximoCenario: 0 }
+            ]
+        },
+        {// 13 - Fim
+            imagem: "imagens/IMG_4822.jpeg",
+            texto: "PARABÉNS",
+            acoes: [
+                { texto: "Jogar", proximoCenario: 0 }
+            ]
+        },
+        {// 13 - Fim
+            imagem: "imagens/IMG_4822.jpeg",
+            texto: "PARABÉNS",
+            acoes: [
+                { texto: "Jogar", proximoCenario: 0 }
+            ]
+        },
+        {// 13 - Fim
+            imagem: "imagens/IMG_4822.jpeg",
+            texto: "PARABÉNS",
+            acoes: [
+                { texto: "Jogar", proximoCenario: 0 }
+            ]
+        },
+        {// 13 - Fim
+            imagem: "imagens/IMG_4822.jpeg",
+            texto: "PARABÉNS",
+            acoes: [
+                { texto: "Jogar", proximoCenario: 0 }
+            ]
+        },
+        {// 13 - Fim
+            imagem: "imagens/IMG_4822.jpeg",
+            texto: "PARABÉNS",
+            acoes: [
+                { texto: "Jogar", proximoCenario: 0 }
+            ]
+        },
+        {// 13 - Fim
+            imagem: "imagens/IMG_4822.jpeg",
+            texto: "PARABÉNS",
+            acoes: [
+                { texto: "Jogar", proximoCenario: 0 }
+            ]
+        },
+        {// 13 - Fim
+            imagem: "imagens/IMG_4822.jpeg",
+            texto: "PARABÉNS",
+            acoes: [
+                { texto: "Jogar", proximoCenario: 0 }
+            ]
+        },
+        {// 13 - Fim
+            imagem: "imagens/IMG_4822.jpeg",
+            texto: "PARABÉNS",
+            acoes: [
+                { texto: "Jogar", proximoCenario: 0 }
+            ]
+        },
+        {// 13 - Fim
+            imagem: "imagens/IMG_4822.jpeg",
+            texto: "PARABÉNS",
+            acoes: [
+                { texto: "Jogar", proximoCenario: 0 }
+            ]
+        },
+        {// 13 - Fim
+            imagem: "imagens/IMG_4822.jpeg",
+            texto: "PARABÉNS",
+            acoes: [
+                { texto: "Jogar", proximoCenario: 0 }
+            ]
+        },
+        {// 13 - Fim
+            imagem: "imagens/IMG_4822.jpeg",
+            texto: "PARABÉNS",
+            acoes: [
+                { texto: "Jogar", proximoCenario: 0 }
             ]
         }
     ];
