@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O ET Contrabandista de Açaí</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: white;
+        }
+
+        img {
+            width: 100%;
+            max-height: 600px;
+            object-fit: cover;
+        }
+
+        header {
+            background-color: #006600;
+            color: white;
+            padding: 10px 10px;
+            text-align: center;
+        }
+
+        header button {
+            font-size: 16px;
+            color: black;
+        }
+
+        .titulo {
+            background-color: #333;
+            color: white;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .container {
+            padding: 0px 15px 5px 10px;
+        }
+
+        .card {
+            background-color: black;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 0px;
+            padding: 15px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 0px;      
+        }
+
+        .buttons button {
+            margin: 5px;
+            padding: 0px 20px;
+            font-size: 16px;
+            color: black;
+        }
+
+        @media (min-width: 600px) {
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <button id="btnMusica" onclick="musica()">Ativar Música</button>
+    <button onclick="window.location.href='index.html'">Reiniciar</button>
+    <button onclick="window.location.href='../../index.html'">ArenaCon</button>
+</header>
+
+<div class="titulo">
+    <h3>O ET Contrabandista de Açaí</h3>
+</div>
+    
+<div class="container">
+    <div class="card">
+        <img id="cenarioImagem" src="imagens/IMG_4830.jpeg" alt="Imagem do jogo"/>
+        <p id="cenarioTexto">Tela inicial. Ative a música para uma melhor experiência do jogo.</p>
+    </div>
+    <div class="buttons" id="buttonsContainer">
+        <button onclick="irParaCenario(0)">Investigar o Mistério</button>
+    </div>
+</div>
+
+<!-- Música de fundo -->
+<audio id="musicaFundo" loop>
+    <source src="musicas/musicamisterios.mp3" type="audio/mpeg">
+    Seu navegador não suporta a tag de áudio.
+</audio>
+
+
+<script>
+    const cenarios = [
+
+// Inicio do código copiado
+
+
+    {// 0 - Início
+        imagem: "imagens/IMG_001.jpeg",
+        texto: "Você é um explorador em uma missão de pesquisa nas profundezas da floresta amazônica. Ao seguir um rastro estranho, descobre uma nave espacial escondida entre as árvores. Intrigado, você decide investigar. Sua missão é descobrir o que essa nave está fazendo ali e quem é o dono dela. Mas tenha cuidado – uma presença desconhecida espreita e qualquer movimento errado pode significar perigo.",
+        acoes: [
+            { texto: "Começar Aventura", proximoCenario: 2 }
+        ]
+    },
+    {// 1 - Tela de Fim de Jogo
+        imagem: "imagens/IMG_002.jpeg",
+        texto: "Você foi descoberto pelo extraterrestre contrabandista antes de descobrir seu segredo. Sua aventura termina aqui… Mas não desista! Tente novamente e tome mais cuidado desta vez!",
+        acoes: [
+            { texto: "Tentar Novamente", proximoCenario: 0 }
+        ]
+    },
+    {// 2 - Entrada da Nave
+        imagem: "imagens/IMG_003.jpeg",
+        texto: "Você chega à entrada da nave. A porta está ligeiramente entreaberta e um feixe de luz esverdeada ilumina o chão da floresta. Parece seguro, mas você ouve ruídos ao longe.",
+        acoes: [
+            { texto: "Entrar na nave", proximoCenario: 3 },
+            { texto: "Observar ao redor", proximoCenario: 4 }
+        ]
+    },
+    {// 3 - Corredor da Nave
+        imagem: "imagens/IMG_004.jpeg",
+        texto: "Dentro da nave, você se encontra em um corredor escuro e estreito. Luzes piscam ao longo das paredes metálicas. À frente, há duas portas, uma à esquerda e outra à direita.",
+        acoes: [
+            { texto: "Abrir porta esquerda", proximoCenario: 5 },
+            { texto: "Abrir porta direita", proximoCenario: 6 }
+        ]
+    },
+    {// 4 - Arbustos ao redor da Nave
+        imagem: "imagens/IMG_005.jpeg",
+        texto: "Ao redor da nave, você encontra pegadas no solo e marcas de plantas arrancadas. Você pega uma pequena amostra de folhas desconhecidas caídas no chão. Isso pode ser uma pista.",
+        acoes: [
+            { texto: "Entrar na nave", proximoCenario: 3 },
+            { texto: "Seguir as pegadas", proximoCenario: 1 }
+        ]
+    },
+    {// 5 - Sala de Contenção
+        imagem: "imagens/IMG_006.jpeg",
+        texto: "A sala está cheia de pequenas cápsulas com plantas dentro. Em uma delas, você reconhece uma muda de açaizeiro. Parece que o dono da nave está contrabandeando plantas da floresta!",
+        acoes: [
+            { texto: "Investigar a cápsula", proximoCenario: 7 },
+            { texto: "Voltar para o corredor", proximoCenario: 3 }
+        ]
+    },
+    {// 6 - Sala de Controle
+        imagem: "imagens/IMG_007.jpeg",
+        texto: "Você encontra um painel cheio de botões estranhos, mas consegue reconhecer um mapa da região da floresta. No centro do mapa, há um ponto piscando. Parece que essa é a base do dono da nave.",
+        acoes: [
+            { texto: "Tentar acessar os arquivos", proximoCenario: 8 },
+            { texto: "Voltar para o corredor", proximoCenario: 3 }
+        ]
+    },
+    {// 7 - Examinando a Cápsula
+        imagem: "imagens/IMG_008.jpeg",
+        texto: "Você examina a cápsula e percebe que as mudas de açaizeiro estão etiquetadas com códigos. Algumas estão faltando, indicando que foram retiradas recentemente.",
+        acoes: [
+            { texto: "Registrar as informações", proximoCenario: 9 },
+            { texto: "Deixar a sala", proximoCenario: 3 }
+        ]
+    },
+    {// 8 - Acessando os Arquivos
+        imagem: "imagens/IMG_009.jpeg",
+        texto: "Você tenta acessar os arquivos no painel de controle. Após alguns segundos, uma mensagem aparece em uma língua desconhecida, mas você consegue decifrar parte dela: “Contrabando – Açaizeiros.”",
+        acoes: [
+            { texto: "Baixar os dados", proximoCenario: 10 },
+            { texto: "Deixar a sala", proximoCenario: 3 }
+        ]
+    },
+    {// 9 - Armazém da Nave
+        imagem: "imagens/IMG_010.jpeg",
+        texto: "Você chega a uma sala que parece um armazém. Diversas mudas estão em prateleiras e caixas. De repente, você escuta passos se aproximando.",
+        acoes: [
+            { texto: "Esconder-se atrás das caixas", proximoCenario: 11 },
+            { texto: "Enfrentar o intruso", proximoCenario: 1 }
+        ]
+    },
+    {// 10 - Informações Baixadas
+        imagem: "imagens/IMG_011.jpeg",
+        texto: "Você consegue baixar os dados do painel de controle e agora tem informações importantes sobre o contrabando de açaizeiros.",
+        acoes: [
+            { texto: "Sair da sala", proximoCenario: 3 },
+            { texto: "Procurar uma saída da nave", proximoCenario: 12 }
+        ]
+    },
+
+
+
+
+
+
+
+
+    {// 11 - Se Escondendo no Armazém
+        imagem: "imagens/IMG_012.jpeg",
+        texto: "Você se esconde atrás das caixas e observa enquanto uma figura estranha passa por você. É um alienígena de pele azul e olhos brilhantes, carregando uma muda de açaizeiro.",
+        acoes: [
+            { texto: "Seguir o alienígena", proximoCenario: 13 },
+            { texto: "Esperar que ele vá embora", proximoCenario: 14 }
+        ]
+    },
+    {// 12 - Saída da Nave
+        imagem: "imagens/IMG_013.jpeg",
+        texto: "Você se aproxima da saída, mas percebe que ela está trancada. Para abrir a porta, você precisa decifrar um painel.",
+        acoes: [
+            { texto: "Tentar decifrar o painel", proximoCenario: 15 },
+            { texto: "Procurar outra saída", proximoCenario: 16 }
+        ]
+    },
+    {// 13 - Seguindo o Alienígena
+        imagem: "imagens/IMG_014.jpeg",
+        texto: "Você segue o alienígena por corredores estreitos e observa enquanto ele guarda a muda de açaizeiro em uma caixa marcada com coordenadas de outros planetas. Parece que ele está preparando um carregamento.",
+        acoes: [
+            { texto: "Continuar seguindo o alienígena", proximoCenario: 17 },
+            { texto: "Tentar voltar para o armazém", proximoCenario: 9 }
+        ]
+    },
+    {// 14 - Esperando o Alienígena Sair
+        imagem: "imagens/IMG_015.jpeg",
+        texto: "O alienígena sai da sala e você está sozinho novamente. Parece seguro, mas você sabe que ele pode voltar a qualquer momento.",
+        acoes: [
+            { texto: "Investigar a área", proximoCenario: 18 },
+            { texto: "Voltar para o corredor", proximoCenario: 3 }
+        ]
+    },
+    {// 15 - Decifrando o Painel
+        imagem: "imagens/IMG_016.jpeg",
+        texto: "Você tenta decifrar o painel de controle. Combinando os símbolos, você ativa um código que libera a porta. A saída está aberta, mas você sente que ainda há mais para descobrir.",
+        acoes: [
+            { texto: "Sair da nave", proximoCenario: 20 },
+            { texto: "Voltar e investigar mais", proximoCenario: 3 }
+        ]
+    },
+    {// 16 - Procurando Outra Saída
+        imagem: "imagens/IMG_017.jpeg",
+        texto: "Você anda pela nave procurando outra saída e encontra uma escotilha de emergência. No entanto, a escotilha é trancada automaticamente e emite um alarme.",
+        acoes: [
+            { texto: "Tentar desativar o alarme", proximoCenario: 19 },
+            { texto: "Desistir e voltar para o corredor", proximoCenario: 3 }
+        ]
+    },
+    {// 17 - Observando o Alienígena
+        imagem: "imagens/IMG_018.jpeg",
+        texto: "O alienígena começa a se comunicar por um dispositivo. Você percebe que ele está fazendo um acordo para vender as mudas de açaizeiro. Isso confirma suas suspeitas!",
+        acoes: [
+            { texto: "Interceptar a mensagem", proximoCenario: 21 },
+            { texto: "Esconder-se e observar mais", proximoCenario: 22 }
+        ]
+    },
+    {// 18 - Investigando a Área
+        imagem: "imagens/IMG_019.jpeg",
+        texto: "Você investiga a sala e encontra um terminal com informações sobre a operação de contrabando. No terminal, há um diário do alienígena onde ele documenta seu plano de exportar mudas raras, incluindo o açaizeiro, para planetas distantes.",
+        acoes: [
+            { texto: "Copiar as informações do diário", proximoCenario: 23 },
+            { texto: "Voltar para o corredor", proximoCenario: 3 }
+        ]
+    },
+    {// 19 - Desativando o Alarme
+        imagem: "imagens/IMG_020.jpeg",
+        texto: "Você tenta desativar o alarme da escotilha, mas o sistema emite uma mensagem alertando o alienígena de uma invasão. Agora, ele sabe que alguém está na nave.",
+        acoes: [
+            { texto: "Correr para o corredor", proximoCenario: 3 },
+            { texto: "Esconder-se na escotilha", proximoCenario: 24 }
+        ]
+    },
+    {// 20 - Saindo da Nave
+        imagem: "imagens/IMG_021.jpeg",
+        texto: "Você sai da nave com as informações que conseguiu reunir sobre o contrabando. Ainda há muito a ser descoberto, mas pelo menos você escapou em segurança. Sua investigação na floresta continua.",
+        acoes: [
+            { texto: "Voltar para a entrada da nave", proximoCenario: 2 }
+        ]
+    },
+
+
+
+
+
+
+    {// 21 - Interceptando a Mensagem
+        imagem: "imagens/IMG_022.jpeg",
+        texto: "Você consegue interceptar a mensagem que o alienígena enviava, obtendo detalhes sobre o destinatário das mudas. Parece que o esquema envolve outros planetas e uma grande rede de tráfico.",
+        acoes: [
+            { texto: "Salvar a mensagem no dispositivo", proximoCenario: 25 },
+            { texto: "Continuar escondido", proximoCenario: 22 }
+        ]
+    },
+    {// 22 - Observando Mais de Perto
+        imagem: "imagens/IMG_023.jpeg",
+        texto: "Enquanto você observa, o alienígena continua a verificar as cápsulas. Ele parece desconfiado e dá uma última olhada ao redor antes de sair da sala. Agora é sua chance de investigar mais!",
+        acoes: [
+            { texto: "Vasculhar a sala", proximoCenario: 26 },
+            { texto: "Seguir o alienígena", proximoCenario: 27 }
+        ]
+    },
+    {// 23 - Diário Copiado
+        imagem: "imagens/IMG_024.jpeg",
+        texto: "Com as informações do diário copiadas, você descobre detalhes preciosos sobre a operação. Agora você tem as provas necessárias para denunciar o esquema.",
+        acoes: [
+            { texto: "Tentar sair da nave", proximoCenario: 20 },
+            { texto: "Procurar uma rota alternativa para sair", proximoCenario: 28 }
+        ]
+    },
+    {// 24 - Escondido na Escotilha
+        imagem: "imagens/IMG_025.jpeg",
+        texto: "Você se esconde na escotilha, mas escuta o alienígena se aproximando. Ele verifica o alarme, e você deve se manter quieto para não ser descoberto.",
+        acoes: [
+            { texto: "Esperar até ele sair", proximoCenario: 29 },
+            { texto: "Atacar o alienígena de surpresa", proximoCenario: 1 }
+        ]
+    },
+    {// 25 - Mensagem Salva
+        imagem: "imagens/IMG_026.jpeg",
+        texto: "Com a mensagem interceptada salva, você tem provas das comunicações do alienígena com a rede de contrabando. Isso é crucial para sua investigação.",
+        acoes: [
+            { texto: "Deixar a sala", proximoCenario: 3 },
+            { texto: "Procurar mais pistas", proximoCenario: 18 }
+        ]
+    },
+    {// 26 - Vasculhando a Sala
+        imagem: "imagens/IMG_027.jpeg",
+        texto: "Ao vasculhar a sala, você encontra um compartimento secreto com mais plantas protegidas por tecnologia avançada. Isso parece ser o estoque principal.",
+        acoes: [
+            { texto: "Analisar o compartimento", proximoCenario: 30 },
+            { texto: "Voltar para o corredor", proximoCenario: 3 }
+        ]
+    },
+    {// 27 - Seguindo o Alienígena Novamente
+        imagem: "imagens/IMG_028.jpeg",
+        texto: "Você segue o alienígena até uma sala onde ele parece estar conversando com um holograma. A imagem mostra outro alienígena que está comprando as mudas.",
+        acoes: [
+            { texto: "Escutar a conversa", proximoCenario: 31 },
+            { texto: "Tentar gravar a conversa", proximoCenario: 32 }
+        ]
+    },
+    {// 28 - Rota Alternativa
+        imagem: "imagens/IMG_029.jpeg",
+        texto: "Você encontra uma saída alternativa e nota que há um painel de segurança que pode ser hackeado. O caminho é arriscado, mas você sente que está mais perto do final.",
+        acoes: [
+            { texto: "Hackear o painel", proximoCenario: 33 },
+            { texto: "Voltar e tentar outro caminho", proximoCenario: 3 }
+        ]
+    },
+    {// 29 - Esperando na Escotilha
+        imagem: "imagens/IMG_030.jpeg",
+        texto: "O alienígena finalmente sai da sala. Você respira aliviado e pode continuar explorando a nave sem ser detectado.",
+        acoes: [
+            { texto: "Investigar o painel de controle", proximoCenario: 6 },
+            { texto: "Procurar a saída da nave", proximoCenario: 12 }
+        ]
+    },
+    {// 30 - Analisando o Compartimento
+        imagem: "imagens/IMG_031.jpeg",
+        texto: "O compartimento contém espécimes de várias plantas raras da floresta. Parece que o alienígena está focado em contrabandear plantas valiosas e únicas.",
+        acoes: [
+            { texto: "Registrar as espécies encontradas", proximoCenario: 34 },
+            { texto: "Voltar para o corredor", proximoCenario: 3 }
+        ]
+    },
+    {// Final - Cena Final
+        imagem: "imagens/IMG_032.jpeg",
+        texto: "Você conseguiu escapar da nave e retornou com todas as provas necessárias para desmontar o esquema de contrabando alienígena. Graças a você, a floresta amazônica está a salvo das ameaças extraterrestres, e a biodiversidade foi protegida!",
+        acoes: [
+            { texto: "Reiniciar Aventura", proximoCenario: 0 }
+        ]
+    }
+
+
+
+
+// Fim do código copiado
+    ];
+
+     // Função para pré-carregar todas as imagens
+    function preloadImages() {
+        cenarios.forEach(cenario => {
+            const img = new Image();
+            img.src = cenario.imagem;
+        });
+    }
+
+    // Chama o pré-carregamento das imagens ao carregar a página
+    window.onload = preloadImages;
+
+        // Função para ativar e desativar a música
+        function toggleMusic() {
+            const audio = document.getElementById("musicaFundo");
+            const button = document.getElementById("btnMusica");
+
+            if (audio.paused) {
+                audio.play();
+                button.textContent = "Desativar Música";
+            } else {
+                audio.pause();
+                button.textContent = "Ativar Música";
+            }
+        }
+
+        // Adiciona o evento de clique ao botão
+        document.getElementById("btnMusica").onclick = toggleMusic;
+    
+    
+    function irParaCenario(cenarioIndex) {
+        const cenario = cenarios[cenarioIndex];
+        
+        document.getElementById('cenarioImagem').src = cenario.imagem;
+        document.getElementById('cenarioTexto').textContent = cenario.texto;
+
+        const buttonsContainer = document.getElementById('buttonsContainer');
+        buttonsContainer.innerHTML = ''; // Limpar os botões anteriores
+
+        cenario.acoes.forEach(acao => {
+            const button = document.createElement('button');
+            button.textContent = acao.texto;
+            button.onclick = () => irParaCenario(acao.proximoCenario);
+            buttonsContainer.appendChild(button);
+        });
+    }
+</script>
+
+</body>
+</html>
+
